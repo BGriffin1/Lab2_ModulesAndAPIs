@@ -24,9 +24,9 @@ ruleset twilio_module {
       }
       
       sendMessage = defaction(_to, _from, _body) {
-        auth = {"api_key":apiKey,"session_id":sessionID}
+        //auth = {"api_key":apiKey,"session_id":sessionID}
         body = {"To":_to, "From":_from, "Body":_body}
-        http:post(<<#{base_url}/2010-04-01/Accounts/#{sessionID}/Messages.json>>, auth=auth, form=body)
+        http:post(<<https://#{sessionID}:#{apiKey}@api.twilio.com/2010-04-01/Accounts/#{sessionID}/Messages.json>>, form=body)
         setting(response)
         return response
       }
