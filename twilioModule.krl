@@ -13,9 +13,6 @@ ruleset twilio_module {
      
     global {
       base_url = "https://api.twilio.com"
-      _to = "18013687125"
-      _from = "13612983151"
-      _body = "This is a test from BRADLEY Twilio API"
       
       sendMessage = defaction(_to, _from, _body) {
         auth = {"api_key":apiKey,"session_id":sessionID}
