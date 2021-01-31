@@ -18,7 +18,7 @@ ruleset twilio_app_code {
     rule retrieve_messages {
         select when message retrieve
         pre{
-            messages = twilio:messages(event:attrs{"to"}, event:attrs{"from"}, event:attrs{"page-size"})
+            messages = twilio:messages(event:attrs{"To"}, event:attrs{"From"}, event:attrs{"page-size"})
         }
         send_directive("Messages", {"Message": messages})
     }

@@ -15,7 +15,7 @@ ruleset twilio_module {
       base_url = "https://api.twilio.com"
 
       messages = function(_to, _from, page_size) {
-        q_init = {"to":_to, "from":_from, "page-size":page_size}
+        q_init = {"To":_to, "From":_from, "page-size":page_size}
         query_string = (q_init.filter(function(v,k){not v.isnull() && v != ""})).klog("message log")
        
 
