@@ -8,7 +8,7 @@ ruleset twilio_module {
       configure using
       apiKey = ""
       sessionID = ""
-      provides messages
+      provides sendMessage
     }
      
     global {
