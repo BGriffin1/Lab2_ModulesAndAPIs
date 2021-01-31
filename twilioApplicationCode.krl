@@ -9,10 +9,9 @@ ruleset twilio_app_code {
     rule send_message {
         select when message send
 
-        pre{
-       myMessage = twilio:sendMessage(event:attrs{"To"}, event:attrs{"From"}, event:attrs{"Body"})
-        }
-        send_directive("Message", {"Message": myMessage})
+        twilio:sendMessage(event:attrs{"To"}, event:attrs{"From"}, event:attrs{"Body"})
+    
+        //send_directive("Message", {"Message": myMessage})
 
     }
     rule retrieve_messages {
