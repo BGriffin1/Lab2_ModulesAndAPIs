@@ -12,4 +12,15 @@ ruleset twilio_app_code {
         twilio:sendMessage(event:attrs{"to"}, event:attrs{"from"}, event:attrs{"message"})
 
     }
+    rule retrieve_messages {
+        select when message retrieve
+        pre{
+            messages = twilio:sendMessage(event:attrs{"to"}, event:attrs{"from"}, event:attrs{"page-size"})
+        }
+        send_directive("Messages", {"Message": messages})
+    }
+
+    
+
+    
   }

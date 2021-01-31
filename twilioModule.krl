@@ -8,11 +8,20 @@ ruleset twilio_module {
       configure using
       apiKey = ""
       sessionID = ""
-      provides sendMessage
+      provides sendMessage, messages
     }
      
     global {
       base_url = "https://api.twilio.com"
+
+      messages = function(_to, _from, _page_size) {
+        q_init = {"to":_to, "from":_from, "page-size":page_size}
+        query_string = (q_init.filter(function(v,k){not v.isnull() && v != ""})).klog("message log")
+       
+
+        response = http:get(<<https://#{sessionID}:#{apiKey}@api.twilio.com/2010-04-01/Accounts/#{sessionID}/Messages.json>>, qs = query_string);
+        response{"content"}.decode(){"messages"}
+      }
       
       sendMessage = defaction(_to, _from, _body) {
         auth = {"api_key":apiKey,"session_id":sessionID}
