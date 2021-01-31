@@ -9,7 +9,7 @@ ruleset twilio_app_code {
     rule send_message {
         select when message send
 
-        twilio:sendMessage(event:attrs{"to"}, event:attrs{"from"}, event:attrs{"message"})
+        twilio:sendMessage(event:attrs{"To"}, event:attrs{"From"}, event:attrs{"Body"})
 
     }
     rule retrieve_messages {
