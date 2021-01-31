@@ -9,13 +9,16 @@ ruleset twilio_app_code {
     rule send_message {
         select when message send
 
-        twilio:sendMessage(event:attrs{"To"}, event:attrs{"From"}, event:attrs{"Body"})
+        pre{
+       myMessage = twilio:sendMessage(event:attrs{"To"}, event:attrs{"From"}, event:attrs{"Body"})
+        }
+        send_directive("Message", {"Message": myMessage})
 
     }
     rule retrieve_messages {
         select when message retrieve
         pre{
-            messages = twilio:sendMessage(event:attrs{"to"}, event:attrs{"from"}, event:attrs{"page-size"})
+            messages = twilio:messages(event:attrs{"to"}, event:attrs{"from"}, event:attrs{"page-size"})
         }
         send_directive("Messages", {"Message": messages})
     }
